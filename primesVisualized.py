@@ -5,36 +5,37 @@ class Application:
     def quit(self):
         self.root.destroy()
     
-    def __init__(self, dimensions):
-        self.root = Tk()
+    def dimension(self):
+        self.maxRange = self.entry.get()
+        print self.maxRange
+    
+    def __init__(self, master, dimension):
+        frame = Frame(master)
+        frame.grid()
         
-        visual = Canvas(self.root, 
-                        width=dimensions[1], 
-                        height=dimensions[0])
-        visual.pack()
+        #Canvas where black dots will be placed
+        self.canvas = Canvas(frame, width=dimension[0], height=dimension[1]+dimension[2]/dimension[1]).grid(row=1)
         
-        bLeave = Button(visual, 
-                             text="Quit", 
-                             command=self.quit)
-        bLeave.pack()
+        #Button to exit canvas
+        self.terminate = Button(frame, text="Quit", command=frame.quit).grid(row=2, column=3)
+        
+        #Text for numRange
+        Label(frame, text="Max Number Range:").grid(row=2, column=0)
+        
+        #numRange user input
+        self.entry = Entry(frame)
+        self.entry.grid(row=2, column=1)
+        
+        #numRange user input confirmation
+        self.confirm = Button(frame, text='Enter', command=self.dimension).grid(row=2, column=2)
+        
         mainloop()
 
-def dimension(maxRange):
-    return [100,10,7]
-        
-    
-    return [length, width, extra]
-
 def main(): 
-    maxRange = int(raw_input("What is the max range of numbers you want tested for being prime? ")) 
     primes = [2]
-
-    dimensions = dimension(maxRange)
-    visual = Application(dimensions)
-    
-    #DEBUG
-    print 'dimensions: %s' % dimensions
-    #ENDDEBUG
+    root = Tk()
+    dimension = [100,100,0]
+    visual = Application(root, dimension)
     
     print 'Total primes: %d, all primes: %s' % (len(primes), primes) 
     
