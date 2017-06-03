@@ -7,35 +7,34 @@ class Application:
     
     def dimension(self):
         self.maxRange = self.entry.get()
-        print self.maxRange
-    
-    def __init__(self, master, dimension):
+        
+        
+    def __init__(self, master):
         frame = Frame(master)
         frame.grid()
         
         #Canvas where black dots will be placed
-        self.canvas = Canvas(frame, width=dimension[0], height=dimension[1]+dimension[2]/dimension[1]).grid(row=1)
+        self.canvas = Canvas(frame, width=1000, height=1000).grid(row=1) 
         
         #Button to exit canvas
         self.terminate = Button(frame, text="Quit", command=frame.quit).grid(row=2, column=3)
         
         #Text for numRange
-        Label(frame, text="Max Number Range:").grid(row=2, column=0)
+        Label(frame, text="Max Number Range:").grid(row=2, column=0, sticky="w")
         
         #numRange user input
         self.entry = Entry(frame)
-        self.entry.grid(row=2, column=1)
+        self.entry.grid(row=2, column=1, sticky= W)
         
         #numRange user input confirmation
-        self.confirm = Button(frame, text='Enter', command=self.dimension).grid(row=2, column=2)
+        self.confirm = Button(frame, text='Enter', command=self.dimension).grid(row=2, column=2, sticky="w")
         
         mainloop()
 
 def main(): 
     primes = [2]
     root = Tk()
-    dimension = [100,100,0]
-    visual = Application(root, dimension)
+    visual = Application(root)
     
     print 'Total primes: %d, all primes: %s' % (len(primes), primes) 
     
