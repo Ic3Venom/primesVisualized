@@ -1,6 +1,5 @@
 #This program was my second idea, involving a canvas
 from Tkinter import *
-from ctypes import windll
 
 class Application:
         
@@ -74,16 +73,10 @@ class Application:
     
     def getPixel(self, value):
         coords = self.coordValue(value)
-        
-        dc = windll.user32.GetDC(0)     
-        rgb = windll.gdi32.GetPixel(dc,coords[0],coords[1])
-        r = rgb & 0xff
-        print 'r', r
-        if r > 0:
-            return True
-        else:
-            return False
     
+        pass
+    
+     
     def solve(self):
         n = 2
         
@@ -102,6 +95,7 @@ class Application:
                     exit(0)
                 
             n += 1
+            
     def uncolor(self, value):
         coords = self.coordValue(value)
         self.img.put('#ffffff', (coords[0], coords[1]))
